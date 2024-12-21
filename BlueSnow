@@ -1,0 +1,41 @@
+-- Universal Script: HoangHien2k3 GUI --
+local GameScript, StarterGui, ATitle, CustomDur, PlrN
+GameScript = {
+    [994732206] = "https://raw.githubusercontent.com/NganHa2k3/RobloxScript_1/main/BloxFruits_Language"
+    -- Blox Fruits
+}
+
+StarterGui = game:GetService("StarterGui")
+ATitle = "《Script Alert》"
+CustomDur = 1.5
+PlrN = game:GetService("Players").LocalPlayer.Name
+
+function Notification(message)
+    StarterGui:SetCore("SendNotification", {
+        Title = ATitle,
+        Text = message,
+        Duration = CustomDur,
+    })
+end
+
+function Load_GameScript(GId)
+    local Script_URL = GameScript[GId]
+    if Script_URL then
+        local success, result = pcall(function()
+            return loadstring(game:HttpGet(Script_URL))()
+        end)
+        if not success then
+            warn("HH2k3: Failed to load script [" .. result .. "]")
+        end
+    else
+        if PlrN == "noizybubnnyy" then
+            print("HH2k3: Hello myself :) !")
+        else
+            print("HH2k3: Hello player :) !")
+        end
+        Notification("HH2k3: Script not supported for these game.")
+    end
+end
+
+Load_GameScript(game.GameId)
+Notification("Loaded script done for [GameId: " .. game.GameId .. " ] !")
